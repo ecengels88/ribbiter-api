@@ -21,3 +21,4 @@ Route.on('/').render('welcome')
 Route.get('/user', 'UserController.index')
 Route.post('/users', 'UserController.store');
 Route.post('/login', 'UserController.login');
+Route.post('/posts', 'PostController.store').middleware('auth');
