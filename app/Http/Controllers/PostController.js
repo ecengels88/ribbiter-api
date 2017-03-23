@@ -1,6 +1,12 @@
 'use strict'
 
 class PostController {
+
+  * index(request, response) {
+    const allPosts = yield allPosts.with('posts').fetch();
+    response.json(allPosts);
+  }
+
   * store(request, response) {
     const input = request.only('body');
     input.user_id = request.authUser.id;

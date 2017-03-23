@@ -19,6 +19,7 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 Route.get('/user', 'UserController.index')
+Route.get('/posts', 'PostController.index').middleware('auth');
 Route.post('/users', 'UserController.store');
 Route.post('/login', 'UserController.login');
 Route.post('/posts', 'PostController.store').middleware('auth');
