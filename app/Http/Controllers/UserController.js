@@ -21,6 +21,27 @@ class UserController {
   response.send(user);
 }
 
+* login(request, response) {
+    const { username, password } = request.only('username', 'password');
+
+    // SELECT * FROM users WHERE username = ? LIMIT 1
+    const user = yield User.query().where({ username }).firstOrFail();
+
+    const isValid = yield Hash.verify(password, user.password);
+
+    if(!isValid) {
+      return response.status(401).json({
+        message: 'Invalid username/password'
+      });
+    }
+
+    // Create a special password for the users
+    const token = yield request.auth.generate(user);
+
+    // Send the token to the user
+    response.json({ token });
+}
+
   * show(request, response) {
     //
   }
