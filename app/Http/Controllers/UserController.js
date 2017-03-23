@@ -3,7 +3,8 @@
 class UserController {
 
   * index(request, response) {
-    //
+    const users = yield User.all()
+    response.JSON(users)
   }
 
   * create(request, response) {
